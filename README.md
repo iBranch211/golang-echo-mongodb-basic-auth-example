@@ -88,7 +88,7 @@ http://localhost:9000/api
 
 http://localhost:9000/api
 
-<img src="https://github.com/susimsek/golang-echo-mongodb-basic-auth-example/blob/main/images/golang-swagger.png" alt="Golang Swagger" width="100%" height="100%"/> 
+<img src="https://github.com/susimsek/golang-echo-mongodb-basic-auth-example/blob/main/images/go-swagger.png" alt="Golang Swagger" width="100%" height="100%"/> 
 
 ## Development
 
