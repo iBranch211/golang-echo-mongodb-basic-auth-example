@@ -14,6 +14,9 @@ import (
 	"log"
 )
 
+var userController *controller.UserController
+var authValidator *security.AuthValidator
+
 // @title Golang User REST API
 // @description Provides access to the core features of Golang User REST API
 // @version 1.0
@@ -25,17 +28,6 @@ import (
 // @in header
 // @name Authorization
 func main() {
-
-	mongoConnection, errorMongoConn := config.MongoConnection()
-
-	if errorMongoConn != nil {
-		log.Println("Error when connect mongo : ", errorMongoConn.Error())
-	}
-
-	userRepository := repository.NewUserRepository(mongoConnection)
-	userController := controller.NewUserController(userRepository)
-	authValidator := security.NewAuthValidator(userRepository)
-
 	e := echo.New()
 
 	e.HTTPErrorHandler = handler.ErrorHandler
@@ -49,4 +41,15 @@ func main() {
 
 	// echo server 9000 de başlatıldı.
 	e.Logger.Fatal(e.Start(fmt.Sprintf(":%s", config.ServerPort)))
+}
+
+func init() {
+	mongoConnection, errorMongoConn := config.MongoConnection()
+
+	if errorMongoConn != nil {
+		log.Println("Error when connect mongo : ", errorMongoConn.Error())
+	}
+	userRepository := repository.NewUserRepository(mongoConnection)
+	userController = controller.NewUserController(userRepository)
+	authValidator = security.NewAuthValidator(userRepository)
 }
